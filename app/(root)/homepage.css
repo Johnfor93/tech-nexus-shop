@@ -1,0 +1,33 @@
+.foreground:nth-child(odd):after {
+    content: "";
+    position: absolute;
+    bottom: -16%;
+    left: 3%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #030d2b41;
+    z-index: 1;
+    filter: blur(30px);
+    display: block;
+}
+
+.foreground:nth-child(even):after {
+    content: "";
+    position: absolute;
+    bottom: -16%;
+    right: 3%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #030d2b41;
+    z-index: 1;
+    filter: blur(30px);
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .background-homepage {
+        background-size: 100% auto;
+    }
+}
