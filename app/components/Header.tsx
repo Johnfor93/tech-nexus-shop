@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
+/* Todo
+    Make the component responsive
+*/
 function Header() {
     return <>
         <div className="p-6 bg-white">

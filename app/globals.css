@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .productDescriptionSection h1{
+    @apply text-5xl mb-4 font-bold mt-2;
+  }
+  .productDescriptionSection h2{
+    @apply text-2xl mb-4 font-bold mt-2 md:text-3xl;
+  }
+  .productDescriptionSection h3{
+    @apply text-xl mb-4 font-bold mt-3 md:text-2xl;
+  }
+  .productDescriptionSection h4{
+    @apply text-lg mb-1 font-bold mt-2 md:text-xl;
+  }
+  .productDescriptionSection h5{
+    @apply text-base mb-4 font-bold md:text-lg;
+  }
+  .productDescriptionSection h6{
+    @apply text-base mb-4 font-bold md:text-lg;
+  }
+  .productDescriptionSection p{
+    @apply text-base mb-0.5;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
