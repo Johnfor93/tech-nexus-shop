@@ -29,21 +29,6 @@ function Header() {
                 className="text-midnight-950 hover:underline text-lg font-semibold">
                 Products
                 </Link>
-                <Link
-                href="/contact"
-                className="text-midnight-950 hover:underline text-lg font-semibold">
-                Contact Us
-                </Link>
-                <Link
-                href="/customer-support"
-                className="text-midnight-950 hover:underline text-lg font-semibold">
-                Support
-                </Link>
-                <Link
-                href="/faq"
-                className="text-midnight-950 hover:underline text-lg font-semibold">
-                FAQ
-                </Link>
             </div>
             </div>
         </div>

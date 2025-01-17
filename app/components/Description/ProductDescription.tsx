@@ -1,17 +1,22 @@
-import {getProductById} from "@/app/lib/data";
+import { getProductById } from "@/app/lib/data";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
-import gfm from 'remark-gfm';
 import Link from "next/link";
-import {LucideShoppingCart} from "lucide-react";
+import { LucideShoppingBag } from "lucide-react";
 import React from "react";
+import { ProductDetailInterface } from "@/app/type";
+import ProductContent from "@/app/components/Description/ProductContent";
 
-export default async function ProductDescription ({idProduct} : {idProduct:string}) {
-    const product = await getProductById(idProduct);
+export default async function ProductDescription({ idProduct }: { idProduct: string }) {
+    const product: ProductDetailInterface | undefined = await getProductById(idProduct);
+
+    console.log(product);
+    if (!product) {
+        throw new Error("Product not found");
+    }
 
     return (
         <>
-            <div className={"flex md:flex-row flex-col gap-x-8 gap-y-4 mb-4"}>
+            <div className={"flex md:flex-row flex-col gap-x-8 gap-y-2 md:mb-8 mb-4"}>
                 <div className={"w-full md:w-5/12"}>
                     <Image
                         src={`https://images.takeshape.io/${product.image.path}`}
@@ -21,28 +26,37 @@ export default async function ProductDescription ({idProduct} : {idProduct:strin
                         className="w-full aspect-video md:aspect-square object-cover object-center"
                     />
                 </div>
-                <div className={"w-full md:w-7/12"}>
-                    <h1 className={"text-3xl md:text-5xl font-bold mb-2"}>{product.name}</h1>
-                    <div
-                        className={`bg-[#b3d1f5] px-2 py-1 rounded mb-1 w-fit block text-xs`}>{product.category.title}</div>
+                <div className={"w-full md:w-7/12 p-1"}>
+                    <h1 className={"text-3xl lg:text-5xl font-bold mb-2"}>{product.name}</h1>
+                    <div className={`bg-[#b3d1f5] px-2 py-1 rounded mb-4 w-fit block text-xs`}>
+                        {product.category.title}
+                    </div>
+                    <div className={`flex flex-wrap gap-2 mb-4`}>
+                        {product.colors?.map((color: { name: string, hexcode: string }) => (
+                            <div className={"px-2 py-1 md:px-4 md:py-2 rounded-full bg-midnight-50 p-2 text-sm flex gap-2"} key={color.name}>
+                                <div className={`w-8 aspect-square rounded-full`} style={{ backgroundColor: color.hexcode }}></div>
+                                <div className={`w-full text-center`}>
+                                    {color.name}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className={"text-base mb-2"}>
+                        <span className={"font-bold"}>Sold :</span>{product.sold}
+                    </div>
                     <h2 className={"text-2xl md:text-3xl font-bold"}>$ {product.price}</h2>
                     <div className="w-full gap-2 py-4 flex flex-row justify-between">
-                        <Link
-                            href={`/products/${product._id}`}
-                            className="text-midnight-950 bg rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center border-midnight-950 border text-sm">
-                            <LucideShoppingCart/> Add to Cart
-                        </Link>
                         <Link href="/"
-                            className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm">
-                            Buy Now
+                              className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm">
+                            <LucideShoppingBag />Buy Now
                         </Link>
                     </div>
                 </div>
             </div>
 
-            <div className={"text-base text-justify productDescriptionSection"}>
-                <ReactMarkdown remarkPlugins={[gfm]}>{product.description}</ReactMarkdown>
-            </div>
+            <hr />
+
+            <ProductContent product={product} />
         </>
-    )
+    );
 };

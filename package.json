@@ -9,6 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroui/pagination": "^2.2.8",
+    "@heroui/react": "^2.6.13",
+    "@heroui/system": "^2.4.6",
+    "@heroui/tabs": "^2.2.7",
+    "@heroui/theme": "^2.4.5",
+    "framer-motion": "^11.18.0",
     "lucide-react": "^0.471.1",
     "next": "^15.1.4",
     "react": "19.0.0",

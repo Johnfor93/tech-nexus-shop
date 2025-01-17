@@ -6,7 +6,7 @@ const graphQlToken : string | undefined = process.env.GRAPHQL_TOKEN;
 if(graphqlUrl === undefined) throw new Error("GRAPHQL_URL is not defined on environment variables");
 if(graphQlToken === undefined) throw new Error("GRAPHQL_TOKEN is not defined on environment variables");
 
-export async function getProductList(size: number, from: number): Promise<ProductCardInterface[] | undefined> {
+export async function getProductList(size: number, from: number): Promise<{ products: ProductCardInterface[], total: number } | undefined>  {
     const response : Response = await fetch(graphqlUrl as string, {
         method: "POST",
         headers: {
@@ -14,7 +14,7 @@ export async function getProductList(size: number, from: number): Promise<Produc
             "Authorization": `Bearer ${graphQlToken as string}`,
         },
         body: JSON.stringify({
-            query: `{ getProductList(size: ${size}, from: ${from}) { items {_id, category {title,color}, description, image{path}, name, price} } }`,
+            query: `{ getProductList(size: ${size}, from: ${from}) { items {_id, category {title,color}, description, image{path}, name, price}, total } }`,
         }),
     })
 
@@ -22,10 +22,13 @@ export async function getProductList(size: number, from: number): Promise<Produc
 
     if(result === undefined) return undefined;
 
-    return result.data.getProductList.items;
+    return {
+        products: result.data.getProductList.items,
+        total: result.data.getProductList.total
+    };
 }
 
-export async function getProductById(id: string) {
+export async function getProductById(id: string):Promise<ProductDetailInterface | undefined> {
     const response : Response = await fetch(graphqlUrl as string, {
         method: "POST",
         headers: {
@@ -44,16 +47,32 @@ export async function getProductById(id: string) {
                     image{
                         path
                     }, 
+                    colors{
+                        name,
+                        hexcode
+                    },
                     name, 
-                    price
+                    price,
+                    sold,
+                    reviews{
+                        items{
+                            username,
+                            review
+                        }
+                    }
                 }
             }`,
         })
     })
 
+    if( !response.ok ){
+        return undefined;
+    }
+
     const result = await response.json();
 
     if(result === undefined) return undefined;
 
+    console.log(result);
     return result.data.getProduct;
 }

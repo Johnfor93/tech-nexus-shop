@@ -1,13 +1,9 @@
-import { getProductList } from "@/app/lib/data";
-import { ProductCardInterface } from "@/app/type";
-import ProductCard from "@/app/components/Card/ProductCard";
+import ProductListSection from "@/app/components/Section/ProductListSection";
 
-export default async function Products() {
-    const products : ProductCardInterface[] | undefined = await getProductList(10, 0);
+export default async function Products({searchParams}: {searchParams?: {page: string}}) {
+    const page:number = searchParams?.page ? parseInt(searchParams.page) : 1;
+    const perPage = 6;
 
-    if(products === undefined){
-        console.log("No products");
-    }
     return (
         <>
             <div className={"bg-midnight-100"}>
@@ -27,13 +23,8 @@ export default async function Products() {
                 </div>
             </div>
 
-            <div className="container mx-auto">
-                <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 p-8">
-                    {products?.map((item: ProductCardInterface) => (
-                        <ProductCard key={item._id} product={item} />
-                    ))}
-                </div>
-            </div>
+            <ProductListSection page={page} perPage={perPage}/>
+
         </>
     )
 }

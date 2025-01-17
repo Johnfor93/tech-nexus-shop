@@ -43,21 +43,6 @@ function Footer() {
             className="text-white hover:underline text-lg font-semibold">
             Products
           </Link>
-          <Link
-            href="/products"
-            className="text-white hover:underline text-lg font-semibold">
-            Contact Us
-          </Link>
-          <Link
-            href="/customer-support"
-            className="text-white hover:underline text-lg font-semibold">
-            Support
-          </Link>
-          <Link
-            href="/faq"
-            className="text-white hover:underline text-lg font-semibold">
-            FAQ
-          </Link>
         </div>
         <div className="flex flex-col gap-4">
           <div className="text-white text-lg font-semibold">Alamat</div>
