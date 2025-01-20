@@ -1,10 +1,9 @@
 import { getProductById } from "@/app/lib/data";
 import Image from "next/image";
-import Link from "next/link";
-import { LucideShoppingBag } from "lucide-react";
 import React from "react";
 import { ProductDetailInterface } from "@/app/type";
 import ProductContent from "@/app/components/Description/ProductContent";
+import BuyNowDrawer from "@/app/components/Section/BuyNowDrawer";
 
 export default async function ProductDescription({ idProduct }: { idProduct: string }) {
     const product: ProductDetailInterface | undefined = await getProductById(idProduct);
@@ -46,10 +45,7 @@ export default async function ProductDescription({ idProduct }: { idProduct: str
                     </div>
                     <h2 className={"text-2xl md:text-3xl font-bold"}>$ {product.price}</h2>
                     <div className="w-full gap-2 py-4 flex flex-row justify-between">
-                        <Link href="/"
-                              className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm">
-                            <LucideShoppingBag />Buy Now
-                        </Link>
+                        <BuyNowDrawer product={product} />
                     </div>
                 </div>
             </div>
