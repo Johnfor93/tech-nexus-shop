@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {ProductCardInterface} from '@/app/type';
 import React from "react";
-import {LucideShoppingBag} from "lucide-react";
+import BuyNowDrawer from "@/app/components/Section/BuyNowDrawer";
 
 export default function ProductCard({product}: {product: ProductCardInterface}):React.ReactElement {
     return (
@@ -18,12 +18,11 @@ export default function ProductCard({product}: {product: ProductCardInterface}):
                 <div className="text-lg sm:text-xl font-bold">{product.name}</div>
                 <div className="text-base sm:text-lg">${product.price}</div>
                 <div className="w-full gap-2 py-4 flex flex-col lg:flex-row justify-between">
+
                     <Link href={`/products/${product._id}`} className="text-midnight-950 bg rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center border-midnight-950 border text-sm">
                         Product Details
                     </Link>
-                    <Link href="/" className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm">
-                        <LucideShoppingBag /> Buy Now
-                    </Link>
+                    <BuyNowDrawer product={product} />
                 </div>
             </div>
         </div>

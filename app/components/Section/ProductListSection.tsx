@@ -24,15 +24,13 @@ const ProductListSection = async (props: {perPage: number, page:number }) => {
 
     return (
         <>
-            <div className="container mx-auto">
-                <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 p-8">
-                    {products?.map((item: ProductCardInterface) => (
-                        <ProductCard key={item._id} product={item}/>
-                    ))}
-                </div>
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-4 p-8">
+                {products?.map((item: ProductCardInterface) => (
+                    <ProductCard key={item._id} product={item}/>
+                ))}
             </div>
 
-            <div className="container mx-auto flex gap-8 justify-center items-center">
+            <div className={"flex justify-center"}>
                 <PaginationSection currentPage={props.page} totalPage={totalPage}/>
             </div>
         </>

@@ -1,6 +1,6 @@
 import ProductDescription from "@/app/components/Description/ProductDescription";
 
-export default function Product({params}: {params: {id: string}}) {
+export default function Product({params}) {
     const idProduct : string = params.id;
     console.log(idProduct);
 

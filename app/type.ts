@@ -32,7 +32,36 @@ export type ProductCardInterface = {
     image: {
         path: string;
     };
+    colors: {
+        name:string;
+        hexcode: string;
+    }[],
     description: string;
     name: string;
     price: number;
+};
+
+export type ProductOverviewInterface = {
+    _id: string;
+    category: {
+        title: string;
+        color: string;
+    };
+    description?: string;
+    image: {
+        path: string;
+    };
+    name: string;
+    price: number;
+    colors: {
+        name:string;
+        hexcode: string;
+    }[],
+    sold?:number,
+    reviews?:{
+        items : {
+            review: string,
+            username: string
+        }[]
+    }
 };

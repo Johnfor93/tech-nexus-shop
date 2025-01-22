@@ -71,7 +71,7 @@ export default function Home() {
 
       <div className="container mx-auto p-8" id="benefits-section">
       <h1 className="text-midnight-950 md:text-5xl text-3xl font-bold mb-8 text-left">
-        TechNexus is Not About Brand, It's About Quality
+        TechNexus is Not About Brand, It&apos;s About Quality
       </h1>
       <div className="flex lg:flex-col gap-4">
         <div className="grid grid-cols-1 gap-4">

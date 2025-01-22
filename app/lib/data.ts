@@ -14,11 +14,34 @@ export async function getProductList(size: number, from: number): Promise<{ prod
             "Authorization": `Bearer ${graphQlToken as string}`,
         },
         body: JSON.stringify({
-            query: `{ getProductList(size: ${size}, from: ${from}) { items {_id, category {title,color}, description, image{path}, name, price}, total } }`,
+            query: `{ 
+                getProductList(size: ${size}, from: ${from}) { 
+                    items {
+                        _id, 
+                        category {
+                            title,
+                            color
+                        }, 
+                        description, 
+                        image{
+                            path
+                        }, 
+                        name, 
+                        price,
+                        colors{
+                            name,
+                            hexcode
+                        },
+                    }, 
+                    total 
+                } 
+            }`,
         }),
     })
 
     const result = await response.json();
+
+    console.log(result)
 
     if(result === undefined) return undefined;
 

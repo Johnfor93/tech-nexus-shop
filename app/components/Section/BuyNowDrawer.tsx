@@ -1,7 +1,7 @@
 "use client"
 
 import {LucideShoppingBag} from "lucide-react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Drawer,
     DrawerContent,
@@ -10,14 +10,30 @@ import {
     DrawerFooter,
     useDisclosure,
 } from "@heroui/react";
-import {ProductDetailInterface} from "@/app/type";
+import { ProductOverviewInterface} from "@/app/type";
 import Image from "next/image";
 
-const BuyNowDrawer = ({product}:{product: ProductDetailInterface}) => {
+const BuyNowDrawer = ({product}:{product: ProductOverviewInterface}) => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     const [count, setCount] = useState(1);
     const [selectedColor, setSelectedColor] = useState("")
+
+    useEffect(() => {
+        const snapScript: string = "https://app.sandbox.midtrans.com/snap/snap.js";
+        const clientKey: string = String(process.env.MIDTRANS_CLIENT_KEY);
+
+        const script:HTMLScriptElement = document.createElement("script");
+        script.src = snapScript;
+        script.setAttribute( 'data-client-key',clientKey);
+        script.async = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        }
+    }, [])
 
     const handleCountChange = (change:number) => {
         if(count + change < 1){
@@ -49,25 +65,33 @@ const BuyNowDrawer = ({product}:{product: ProductDetailInterface}) => {
             id: product._id,
             name: product.name,
             price: product.price,
-            count: count,
+            amount: count,
             color: selectedColor,
         }
 
-        const result = await fetch('/api/payment/snap-token', {
+        const response:Response = await fetch('/api/payment/snap-token', {
             method: 'POST',
             body: JSON.stringify(body),
         })
 
+        if(!response.ok){
+            alert("Something went wrong");
+            return;
+        }
+
+        const result = await response.json();
+
         console.log(result);
+
+        window['snap'].pay(result.token);
     }
 
     return (
         <>
-            <div className="w-full gap-2 py-4 flex flex-row justify-between cursor-pointer">
-                <div onClick={onOpen}
-                      className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm">
-                    <LucideShoppingBag/>Buy Now
-                </div>
+
+            <div onClick={onOpen}
+                  className="bg-midnight-950 text-midnight-50 rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center text-sm cursor-pointer">
+                <LucideShoppingBag/>Buy Now
             </div>
 
             <Drawer isOpen={isOpen} onOpenChange={onOpenChange}>
@@ -103,9 +127,9 @@ const BuyNowDrawer = ({product}:{product: ProductDetailInterface}) => {
                                 <div>
                                     <div className={"text-base font-bold mb-2"}>Amount</div>
                                     <div className={"grid grid-cols-3 gap-1 w-full"}>
-                                        <div className={"w-full bg-midnight-200 text-center rounded-sm py-2"} onClick={() =>handleCountChange(-1)}>-</div>
+                                        <div className={"w-full bg-midnight-200 text-center rounded-sm py-2 cursor-pointer"} onClick={() =>handleCountChange(-1)}>-</div>
                                         <input className={"w-full bg-gray-50 text-center"} type={"number"} value={count} onChange={(event) => changeHandler(event.target.value)} min={1}/>
-                                        <div className={"w-full bg-midnight-200 text-center rounded-sm py-2"} onClick={()=>handleCountChange(1)}>+</div>
+                                        <div className={"w-full bg-midnight-200 text-center rounded-sm py-2 cursor-pointer"} onClick={()=>handleCountChange(1)}>+</div>
                                     </div>
                                 </div>
                                 <div>

@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  module:['midtrans-client'],
 };
 
 export default nextConfig;
