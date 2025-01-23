@@ -11,12 +11,6 @@ const ReviewForm: React.FC<ReviewFromProps> = ( {idProduct, onRefreshReviews}) =
     const [review, setReview] = useState("")
 
     const handleSubmit = async () => {
-        console.log({
-            idProduct: idProduct,
-            username: username,
-            review: review,
-        })
-
         const response = await fetch("/api/review/add", {
             method: "POST",
             body: JSON.stringify({
@@ -27,7 +21,6 @@ const ReviewForm: React.FC<ReviewFromProps> = ( {idProduct, onRefreshReviews}) =
         })
 
         if(!response.ok){
-            console.log(response)
             return;
         }
 

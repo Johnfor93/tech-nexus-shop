@@ -41,8 +41,6 @@ export async function getProductList(size: number, from: number): Promise<{ prod
 
     const result = await response.json();
 
-    console.log(result)
-
     if(result === undefined) return undefined;
 
     return {
@@ -96,6 +94,5 @@ export async function getProductById(id: string):Promise<ProductDetailInterface 
 
     if(result === undefined) return undefined;
 
-    console.log(result);
     return result.data.getProduct;
 }

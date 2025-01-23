@@ -8,7 +8,6 @@ import BuyNowDrawer from "@/app/components/Section/BuyNowDrawer";
 export default async function ProductDescription({ idProduct }: { idProduct: string }) {
     const product: ProductDetailInterface | undefined = await getProductById(idProduct);
 
-    console.log(product);
     if (!product) {
         throw new Error("Product not found");
     }

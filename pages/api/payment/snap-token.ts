@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     const body = await JSON.parse(req.body);
     const uuid = uuidv4();
-    console.log(body, uuid);
 
     const snap = new midtransClient.Snap({
         isProduction: false,
@@ -28,7 +27,6 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         })=>{
             // transaction token
             const transactionToken:string = transaction.token;
-            console.log('transactionToken:',transactionToken);
             return transactionToken;
         })
 

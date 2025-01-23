@@ -48,7 +48,6 @@ const BuyNowDrawer = ({product}:{product: ProductOverviewInterface}) => {
 
     const changeHandler = (value:string) => {
         const newValue = value ? parseInt(value) : 0;
-        console.log(newValue);
 
         if(newValue < 1){
             return;
@@ -80,8 +79,6 @@ const BuyNowDrawer = ({product}:{product: ProductOverviewInterface}) => {
         }
 
         const result = await response.json();
-
-        console.log(result);
 
         window['snap'].pay(result.token);
     }

@@ -5,8 +5,6 @@ export default async function Products({searchParams}) {
     const page:number = searchParams?.page ? parseInt(searchParams.page) : 1;
     const perPage = 6;
 
-    console.log("page", page);
-
     return (
         <>
             <div className="background-homepage" id="hero-section">

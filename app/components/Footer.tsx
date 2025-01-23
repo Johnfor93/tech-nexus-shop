@@ -39,9 +39,9 @@ function Footer() {
           </Link>
 
           <Link
-            href="/products"
+            href="/contact"
             className="text-white hover:underline text-lg font-semibold">
-            Products
+            Contact Us
           </Link>
         </div>
         <div className="flex flex-col gap-4">

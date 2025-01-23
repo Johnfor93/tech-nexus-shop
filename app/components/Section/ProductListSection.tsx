@@ -14,7 +14,6 @@ const ProductListSection = async (props: {perPage: number, page:number }) => {
     const total = result.total;
 
     if(products === undefined){
-        console.log("No products");
         return (
             <>Not Found</>
         )

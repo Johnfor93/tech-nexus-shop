@@ -6,9 +6,6 @@ const PaginationSection= ({currentPage, totalPage}: {currentPage: number, totalP
     const router = useRouter();
     const pathname = usePathname();
 
-    console.log(pathname)
-    console.log(router)
-
     const changePage = (page:number) => {
         router.push(`${pathname}?page=${page}`);
     }
