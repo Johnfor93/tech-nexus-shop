@@ -19,7 +19,7 @@ export default function ProductCard({product}: {product: ProductCardInterface}):
                 <div className="text-base sm:text-lg">${product.price}</div>
                 <div className="w-full gap-2 py-4 flex flex-col lg:flex-row justify-between">
 
-                    <Link href={`/product/${product._id}`} className="text-midnight-950 bg rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center border-midnight-950 border text-sm">
+                    <Link href={`/products/${product._id}`} className="text-midnight-950 bg rounded-lg w-full py-2 inline-flex gap-2 justify-center items-center border-midnight-950 border text-sm">
                         Product Details
                     </Link>
                     <BuyNowDrawer product={product} />

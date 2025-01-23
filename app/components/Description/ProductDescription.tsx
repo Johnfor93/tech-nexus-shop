@@ -42,7 +42,7 @@ export default async function ProductDescription({ idProduct }: { idProduct: str
                     <div className={"text-base mb-2"}>
                         <span className={"font-bold"}>Sold :</span>{product.sold}
                     </div>
-                    <h2 className={"text-2xl md:text-3xl font-bold"}>$ {product.price}</h2>
+                    <h2 className={"text-2xl md:text-3xl font-bold"}>Rp. {product.price}</h2>
                     <div className="w-full gap-2 py-4 flex flex-row justify-between">
                         <BuyNowDrawer product={product} />
                     </div>

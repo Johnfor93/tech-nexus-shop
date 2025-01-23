@@ -131,7 +131,7 @@ const BuyNowDrawer = ({product}:{product: ProductOverviewInterface}) => {
                                 </div>
                                 <div>
                                     <div className={"text-base font-bold mb-2"}>Total</div>
-                                    <h2 className={"text-2xl md:text-3xl font-bold text-right"}>$ {product.price * count}</h2>
+                                    <h2 className={"text-2xl md:text-3xl font-bold text-right"}>Rp. {product.price * count}</h2>
                                 </div>
                             </DrawerBody>
                             <DrawerFooter>
@@ -142,7 +142,7 @@ const BuyNowDrawer = ({product}:{product: ProductOverviewInterface}) => {
                                     </div>
                                     <div className={"bg-midnight-900 text-midnight-50 text-center py-2 rounded-lg cursor-pointer"}
                                          onClick={() => {handlePayment()}}>
-                                        Buy Now $ {product.price * count}
+                                        Buy Now Rp. {product.price * count}
                                     </div>
                                 </div>
                             </DrawerFooter>
